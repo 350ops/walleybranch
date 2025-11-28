@@ -27,8 +27,8 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>worklance</string>
-          <string>com.mmdev13.worklance</string>
+          <string>worklancer</string>
+          <string>com.mmdev13.worklancer</string>
         </array>
       </dict>
       <dict>
@@ -94,7 +94,7 @@
       <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     <key>UIUserInterfaceStyle</key>
-    <string>Light</string>
+    <string>Automatic</string>
     <key>UIViewControllerBasedStatusBarAppearance</key>
     <false/>
   </dict>

@@ -5,7 +5,7 @@
     "slug": "worklance",
     "version": "1.0.0",
     "runtimeVersion": "1.0.0",
-    "scheme": "worklance",
+    "scheme": "worklancer",
     "experiments": {
       "tsconfigPaths": true
     },
@@ -30,7 +30,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mmdev13.worklance",
+      "bundleIdentifier": "com.mmdev13.worklancer",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
