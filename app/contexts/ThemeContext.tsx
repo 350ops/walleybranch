@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { View } from "react-native";
+import { View, useColorScheme } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { colorScheme } from "nativewind";
 import { themes } from "@/utils/color-theme";
@@ -19,7 +19,16 @@ export const ThemeContext = createContext<ThemeContextType>({
 });
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-    const [currentTheme, setCurrentTheme] = useState<"light" | "dark">("dark");
+    const systemColorScheme = useColorScheme();
+    const [currentTheme, setCurrentTheme] = useState<"light" | "dark">(systemColorScheme || "dark");
+
+    // Sync with system changes
+    React.useEffect(() => {
+        if (systemColorScheme) {
+            setCurrentTheme(systemColorScheme);
+            colorScheme.set(systemColorScheme);
+        }
+    }, [systemColorScheme]);
 
     const toggleTheme = () => {
         const newTheme = currentTheme === "light" ? "dark" : "light";
