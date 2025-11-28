@@ -46,7 +46,11 @@
     "extra": {
       "router": {
         "origin": false
+      },
+      "eas": {
+        "projectId": "053290af-9e83-4ab4-bf17-88fe8c4d40a1"
       }
-    }
+    },
+    "owner": "mmdev13"
   }
 }
