@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "newArchEnabled": true,
+    "name": "Walley",
+    "slug": "walley",
+    "version": "1.0.0",
+    "runtimeVersion": "1.0.0",
+    "scheme": "walley",
+    "experiments": {
+      "tsconfigPaths": true
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
+    "platforms": ["ios", "android"],
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "softwareKeyboardLayoutMode": "pan",
+      "predictiveBackGestureEnabled": true,
+      "config": {
+        "enableOnBackInvokedCallback": false
+      }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "ed7b0ea7-7597-471f-acf4-e2aa25d7950d"
+      }
+    },
+    "owner": "thomino",
+    "updates": {
+      "url": "https://u.expo.dev/ed7b0ea7-7597-471f-acf4-e2aa25d7950d"
+    }
+  }
+}
