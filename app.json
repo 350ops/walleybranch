@@ -1,11 +1,11 @@
 {
   "expo": {
     "newArchEnabled": true,
-    "name": "Walley",
-    "slug": "walley",
+    "name": "Worklance",
+    "slug": "worklance",
     "version": "1.0.0",
     "runtimeVersion": "1.0.0",
-    "scheme": "walley",
+    "scheme": "worklance",
     "experiments": {
       "tsconfigPaths": true
     },
@@ -30,7 +30,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mmdev13.walley",
+      "bundleIdentifier": "com.mmdev13.worklance",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
