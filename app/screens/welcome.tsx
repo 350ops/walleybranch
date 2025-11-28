@@ -9,6 +9,7 @@ import Icon from '@/components/Icon';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { IconName } from '@/components/Icon';
+import { useAuth } from '@/contexts/AuthContext';
 
 const { width } = Dimensions.get('window');
 
@@ -48,6 +49,7 @@ const slides: SlideData[] = [
 
 export default function OnboardingScreen() {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { signOut } = useAuth();
     const insets = useSafeAreaInsets();
 
     const handleScroll = (event: { nativeEvent: { contentOffset: { x: number } } }) => {
@@ -67,7 +69,7 @@ export default function OnboardingScreen() {
                     style={{ width: '100%', height: '100%' }}
                 >
                     <View className="flex-1 relative">
-                       
+
                         {/* Slideable Content */}
                         <View className="flex-1 justify-center">
                             <FlatList
@@ -111,25 +113,35 @@ export default function OnboardingScreen() {
                         {/* Login/Signup Buttons */}
                         <View style={{ bottom: insets.bottom }} className="px-6 mb-6">
                             <View className='flex flex-row items-center justify-center gap-2'>
-                                <Pressable 
-                                    onPress={() => router.push('/screens/notification-permission')} 
+                                <Pressable
+                                    onPress={() => router.push('/screens/notification-permission')}
                                     className='flex-1 border border-white rounded-full flex flex-row items-center justify-center py-4'
                                 >
                                     <AntDesign name="google" size={22} color="white" />
                                 </Pressable>
-                                <Pressable 
-                                    onPress={() => router.push('/screens/login')} 
+                                <Pressable
+                                    onPress={() => router.push('/screens/login')}
                                     className='flex-1 bg-highlight rounded-full flex flex-row items-center justify-center py-4'
                                 >
                                     <Icon name="Mail" size={20} color="black" />
                                 </Pressable>
-                                <Pressable 
-                                    onPress={() => router.push('/screens/notification-permission')} 
+                                <Pressable
+                                    onPress={() => router.push('/screens/notification-permission')}
                                     className='flex-1 border border-white rounded-full flex flex-row items-center justify-center py-4'
                                 >
                                     <AntDesign name="apple" size={22} color="white" />
                                 </Pressable>
                             </View>
+                            <Pressable
+                                onPress={async () => {
+                                    await signOut();
+                                    router.push('/sign-in');
+                                }}
+                                className='w-full bg-white rounded-full flex flex-row items-center justify-center py-4 mt-4'
+                            >
+                                <Icon name="Phone" size={20} color="black" />
+                                <Text className="text-black font-outfit-bold text-lg ml-2">Login with your phone</Text>
+                            </Pressable>
                         </View>
                     </View>
                 </LinearGradient>

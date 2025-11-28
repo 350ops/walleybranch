@@ -1,6 +1,6 @@
 import { View, Animated } from "react-native";
 import ThemedText from "./ThemedText";
-import useThemeColors from "@/app/contexts/ThemeColors";
+import useThemeColors from '@/contexts/ThemeColors';
 import { useRef, useCallback } from "react";
 import Icon from "./Icon";
 import { useFocusEffect } from "@react-navigation/native";
@@ -35,21 +35,21 @@ export const SmallProgressBarCard = ({
     barWidth = 6
 }: SmallProgressBarCardProps) => {
     const colors = useThemeColors();
-    
+
     // Normalize data to array format
-    const barsData = Array.isArray(data) 
-        ? data 
+    const barsData = Array.isArray(data)
+        ? data
         : [{ percentage: data, color: barColor }];
-    
+
     // Animation values for each bar
     const animatedValues = useRef(
         barsData.map(() => new Animated.Value(0))
     ).current;
-    
+
     const animateProgress = useCallback(() => {
         // Reset all animations
         animatedValues.forEach(anim => anim.setValue(0));
-        
+
         // Animate bars with staggered timing
         const animations = animatedValues.map((anim, index) =>
             Animated.timing(anim, {
@@ -79,17 +79,17 @@ export const SmallProgressBarCard = ({
                     {subtitle}
                 </ThemedText>
             )}
-            
+
             {/* Vertical Progress Bars */}
             <View className="items-center mt-4 mb-2">
                 <View className="flex-row items-end justify-center gap-4" style={{ height: height + 20 }}>
                     {barsData.map((bar, index) => (
                         <View key={index} className="items-center">
                             {/* Progress Bar Container */}
-                            <View 
+                            <View
                                 className="bg-background rounded-full relative overflow-hidden"
-                                style={{ 
-                                    width: barWidth, 
+                                style={{
+                                    width: barWidth,
                                     height: height,
                                     marginHorizontal: 4
                                 }}
@@ -106,7 +106,7 @@ export const SmallProgressBarCard = ({
                                     }}
                                 />
                             </View>
-                            
+
                             {/* Percentage Text Below Bar */}
                             <View className="mt-2 min-h-6 justify-center">
                                 <ThemedText className="text-xs font-semibold text-center">
@@ -122,7 +122,7 @@ export const SmallProgressBarCard = ({
                     ))}
                 </View>
             </View>
-            
+
             {value && (
                 <View className="w-full pt-4 mt-2 border-t border-border flex-row justify-between">
                     <View className="flex-row items-end">

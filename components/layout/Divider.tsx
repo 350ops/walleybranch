@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ViewStyle } from 'react-native';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 
 interface DividerProps {
     orientation?: 'horizontal' | 'vertical';
@@ -23,7 +23,7 @@ export const Divider: React.FC<DividerProps> = ({
     const dividerColor = color || colors.border;
 
     return (
-        <View 
+        <View
             className={`
                 ${orientation === 'horizontal' ? 'w-full' : 'h-full'}
                 ${className}

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Pressable, ViewStyle, Animated, NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
-import { useThemeColors } from 'app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { Link } from 'expo-router';
 import Icon, { IconName } from './Icon';
 import { router } from 'expo-router';
@@ -197,7 +197,7 @@ const Header: React.FC<HeaderProps> = ({
       ]}
       className={`w-full pb-2 flex-row justify-between px-global bg-background relative z-50 ${className}`}
     >
-      
+
       {(showBackButton || leftComponent || title) && (
         <View className='flex-row items-center flex-1'>
           {showBackButton && (

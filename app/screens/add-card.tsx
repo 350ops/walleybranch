@@ -7,7 +7,7 @@ import React, { useRef, useState } from 'react';
 import { Button } from '@/components/Button';
 import Icon from '@/components/Icon';
 import Section from '@/components/layout/Section';
-import useThemeColors from '../contexts/ThemeColors';
+import useThemeColors from "@/contexts/ThemeColors";
 import MultiStep, { Step } from '@/components/MultiStep';
 import { router } from 'expo-router';
 import Select from '@/components/forms/Select';
@@ -69,72 +69,72 @@ export default function AddCardScreen() {
 
     return (
         <>
-            <Header 
-                showBackButton 
-                title='Add New Card' 
+            <Header
+                showBackButton
+                title='Add New Card'
                 rightComponents={[<Button title="Save" onPress={handleSave} />]}
             />
 
             <ThemedScroller>
                 <View className='w-full items-center justify-center py-8'>
-                    <CardPreview 
-                        cardNumber={getLastFourDigits(cardNumber)} 
+                    <CardPreview
+                        cardNumber={getLastFourDigits(cardNumber)}
                         cardHolder={cardHolder}
-                        expiryDate={expiryDate || 'MM/YY'} 
-                        brand={detectCardBrand(cardNumber)} 
-                        onSetDefault={() => { }} 
-                        onDelete={() => { }} 
+                        expiryDate={expiryDate || 'MM/YY'}
+                        brand={detectCardBrand(cardNumber)}
+                        onSetDefault={() => { }}
+                        onDelete={() => { }}
                     />
                 </View>
 
                 <Section title="Card Information" className='mt-10'>
-                    <Input 
+                    <Input
 
-                        label="Card number" 
+                        label="Card number"
                         value={cardNumber}
                         onChangeText={handleCardNumberChange}
                         keyboardType="numeric"
                         containerClassName='mt-6'
-                        //maxLength={19}
+                    //maxLength={19}
                     />
-                 
-                    <Input 
 
-                        label="Cardholder name" 
+                    <Input
+
+                        label="Cardholder name"
                         value={cardHolder}
                         onChangeText={setCardHolder}
-                        containerClassName='mt-0' 
+                        containerClassName='mt-0'
                     />
                     <View className='flex-row gap-4'>
-                        <Input 
-                            placeholder='MM/YY' 
-                            label="Expiry date" 
+                        <Input
+                            placeholder='MM/YY'
+                            label="Expiry date"
                             value={expiryDate}
                             onChangeText={handleExpiryChange}
                             keyboardType="numeric"
                             maxLength={5}
-                            containerClassName='mt-0 flex-1' 
+                            containerClassName='mt-0 flex-1'
                         />
-                        <Input 
-                            placeholder='123' 
-                            label="CVV" 
+                        <Input
+                            placeholder='123'
+                            label="CVV"
                             value={cvv}
                             onChangeText={setCvv}
                             keyboardType="numeric"
                             maxLength={4}
                             secureTextEntry
-                            containerClassName='mt-0 flex-1' 
+                            containerClassName='mt-0 flex-1'
                         />
                     </View>
                 </Section>
 
                 <Section title="Billing Information" className='mt-10'>
-                    <Input 
-                        placeholder='123 Main St, New York, NY 10001' 
-                        label="Billing address" 
+                    <Input
+                        placeholder='123 Main St, New York, NY 10001'
+                        label="Billing address"
                         value={billingAddress}
                         onChangeText={setBillingAddress}
-                        containerClassName='mt-4' 
+                        containerClassName='mt-4'
                     />
                 </Section>
             </ThemedScroller>

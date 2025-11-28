@@ -1,7 +1,7 @@
 import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
 import React from 'react';
 
-import useThemeColors from '../../contexts/ThemeColors';
+import useThemeColors from '../../../contexts/ThemeColors';
 
 export default function Layout() {
   const { isDark } = useThemeColors();

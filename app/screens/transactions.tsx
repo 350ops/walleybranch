@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import Header, { HeaderIcon } from '@/components/Header';
 import ThemedText from '@/components/ThemedText';
-import { useThemeColors } from "@/app/contexts/ThemeColors";
+import useThemeColors from '@/contexts/ThemeColors';
 import { AntDesign } from "@expo/vector-icons";
 import ThemedScroller from '@/components/ThemeScroller';
 import React, { useRef, useState } from 'react';
@@ -65,7 +65,7 @@ const transactionsData: Transaction[] = [
         isIncome: true,
         avatar: require('@/assets/img/user-2.jpg')
     },
-    
+
     // Yesterday
     {
         id: '5',
@@ -107,7 +107,7 @@ const transactionsData: Transaction[] = [
         isIncome: false,
         avatar: require('@/assets/img/user-3.jpg')
     },
-    
+
     // August 7, 2024
     {
         id: '9',
@@ -139,7 +139,7 @@ const transactionsData: Transaction[] = [
         isIncome: true,
         avatar: require('@/assets/img/user-4.jpg')
     },
-    
+
     // August 6, 2024
     {
         id: '12',

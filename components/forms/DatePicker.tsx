@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, TouchableOpacity, Platform, Animated, Pressable } from 'react-native';
 import Modal from 'react-native-modal';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { formatToYYYYMMDD } from '@/utils/date';
 import ThemedText from '@/components/ThemedText';
 import { Button } from '@/components/Button';
@@ -201,8 +201,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           >
             <View className="flex-1 justify-center">
               <ThemedText className={value ? 'text-text' : 'text-text opacity-60'}>
-              {value ? formatToYYYYMMDD(value) : placeholder}
-            </ThemedText>
+                {value ? formatToYYYYMMDD(value) : placeholder}
+              </ThemedText>
             </View>
           </TouchableOpacity>
           <Pressable className="absolute right-3 top-[18px] z-10">
@@ -223,7 +223,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       <View className={`mb-global relative ${containerClassName}`} style={{ position: 'relative' }}>
         <View className="relative">
           <Pressable className='px-0 bg-secondary z-40' onPress={showDatePicker}>
-            <Animated.Text 
+            <Animated.Text
               style={[{
                 top: animatedLabelValue.interpolate({
                   inputRange: [0, 1],
@@ -259,8 +259,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           >
             <View className="flex-1 justify-center">
               <ThemedText className={value ? 'text-text' : 'transparent'}>
-              {value ? formatToYYYYMMDD(value) : ''}
-            </ThemedText>
+                {value ? formatToYYYYMMDD(value) : ''}
+              </ThemedText>
             </View>
           </TouchableOpacity>
 
@@ -285,32 +285,32 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         style={{ position: 'absolute', left: -6, top: 0 }}
         onPress={showDatePicker}
       >
-          <Animated.Text 
-            style={[labelStyle]} 
+        <Animated.Text
+          style={[labelStyle]}
           className="bg-background text-text"
-          >
-            {label}
-          </Animated.Text>
-        </Pressable>
+        >
+          {label}
+        </Animated.Text>
+      </Pressable>
 
-        <TouchableOpacity
-          onPress={showDatePicker}
+      <TouchableOpacity
+        onPress={showDatePicker}
         disabled={disabled}
         className={`border rounded-lg py-3 px-3 h-14 pr-10 text-text bg-transparent
           ${isFocused ? 'border-border' : 'border-border'}
           ${error ? 'border-red-500' : ''}
           ${disabled ? 'opacity-50' : ''}`}
-        >
+      >
         <View className="flex-1 justify-center">
           <ThemedText className={value ? 'text-text' : 'transparent'}>
             {value ? formatToYYYYMMDD(value) : ''}
           </ThemedText>
         </View>
-        </TouchableOpacity>
+      </TouchableOpacity>
 
-        <Pressable className="absolute right-3 top-[18px] z-10">
-          <Icon name="Calendar" size={20} color={colors.text} />
-        </Pressable>
+      <Pressable className="absolute right-3 top-[18px] z-10">
+        <Icon name="Calendar" size={20} color={colors.text} />
+      </Pressable>
 
       {error && (
         <ThemedText className="text-red-500 text-xs mt-1">{error}</ThemedText>

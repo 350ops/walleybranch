@@ -1,7 +1,7 @@
 import { View, Dimensions } from "react-native";
 import ThemedText from "./ThemedText";
 import { LineChart } from "react-native-chart-kit";
-import useThemeColors from "@/app/contexts/ThemeColors";
+import useThemeColors from '@/contexts/ThemeColors';
 import { useState } from "react";
 import Icon from "./Icon";
 
@@ -34,7 +34,7 @@ export const SmallChartCard = ({
     const minValue = Math.min(...data);
     const maxValue = Math.max(...data);
     const range = maxValue - minValue;
-    
+
     // Control steepness through chart configuration rather than data transformation
     const heightFactor = 50; // Base height
     const currentHeight = height; // Use the prop

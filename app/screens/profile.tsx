@@ -4,24 +4,48 @@ import ThemedText from '@/components/ThemedText';
 import Avatar from '@/components/Avatar';
 import ListLink from '@/components/ListLink';
 import ThemedScroller from '@/components/ThemeScroller';
-import React, { useRef } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import ThemeToggle from '@/components/ThemeToggle';
 import Icon from '@/components/Icon';
 import Section from '@/components/layout/Section';
 import ActionSheetThemed from '@/components/ActionSheetThemed';
 import { ActionSheetRef } from 'react-native-actions-sheet';
+import { useFocusEffect } from 'expo-router';
+import { authApi } from '@/lib/auth-api';
 
 export default function ProfileScreen() {
     const actionSheetRef = useRef<ActionSheetRef>(null);
+    const [profile, setProfile] = useState<any>(null);
+
+    useFocusEffect(
+        useCallback(() => {
+            loadProfile();
+        }, [])
+    );
+
+    const loadProfile = async () => {
+        try {
+            const data = await authApi.getUserProfile();
+            setProfile(data);
+        } catch (error) {
+            console.error('Error loading profile:', error);
+        }
+    };
+
     return (
         <>
             <Header showBackButton rightComponents={[<ThemeToggle />]} />
             <View className='flex-1'>
                 <ThemedScroller className='flex-1 pt-4'>
                     <View className=" pt-10 pb-10 mb-4 w-full items-center">
-                        <Avatar src={require('@/assets/img/user-3.jpg')} size="xxl" />
+                        <Avatar
+                            src={profile?.avatar_url ? { uri: profile.avatar_url } : require('@/assets/img/user-3.jpg')}
+                            size="xxl"
+                        />
                         <View className=" items-center mt-4">
-                            <ThemedText className="text-4xl font-bold">John Doe</ThemedText>
+                            <ThemedText className="text-4xl font-bold">
+                                {profile?.full_name || 'User'}
+                            </ThemedText>
                             <ThemedText className='text-base mt-1'>Personal account</ThemedText>
                         </View>
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, Pressable, Platform } from 'react-native';
 import ActionSheet, { ActionSheetRef } from 'react-native-actions-sheet';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import ThemedText from '@/components/ThemedText';
 import * as NavigationBar from 'expo-navigation-bar';
-import { useTheme } from '@/app/contexts/ThemeContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface ConfirmationModalProps {
     isVisible: boolean;
@@ -26,7 +26,8 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     cancelText = 'Cancel',
     actionSheetRef
 }) => {
-    const { isDark } = useTheme();
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
     const colors = useThemeColors();
 
     React.useEffect(() => {
@@ -67,7 +68,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             <View className="p-8 pb-14">
                 <ThemedText className="text-xl font-bold mb-2">{title}</ThemedText>
                 <ThemedText className="text-light-subtext dark:text-dark-subtext mb-6">{message}</ThemedText>
-                
+
                 <View className="flex-row justify-between space-x-3">
                     <Pressable
                         onPress={handleCancel}

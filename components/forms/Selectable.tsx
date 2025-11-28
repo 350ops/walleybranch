@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { View, Pressable, StyleProp, ViewStyle } from 'react-native';
 import ThemedText from '../ThemedText';
 import Icon, { IconName } from '../Icon';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import AnimatedView from '../AnimatedView';
 
 interface SelectableProps {
@@ -49,9 +49,9 @@ const Selectable: React.FC<SelectableProps> = ({
         <View className="flex-row items-center">
           {icon && (
             <View className={`mr-4 h-16 w-16 rounded-xl items-center justify-center ${selected ? 'bg-text' : 'bg-background'}`}>
-              <Icon 
-                name={icon} 
-                size={24} 
+              <Icon
+                name={icon}
+                size={24}
                 strokeWidth={1.5}
                 color={iconColor || (selected ? colors.invert : colors.icon)}
               />
@@ -74,9 +74,9 @@ const Selectable: React.FC<SelectableProps> = ({
           </View>
           {selected ? (
             <AnimatedView className="ml-3" animation="bounceIn" duration={500}>
-              <Icon 
-                name="CheckCircle2" 
-                size={24} 
+              <Icon
+                name="CheckCircle2"
+                size={24}
                 color={colors.text}
               />
             </AnimatedView>

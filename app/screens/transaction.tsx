@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import Header, { HeaderIcon } from '@/components/Header';
 import ThemedText from '@/components/ThemedText';
-import { useThemeColors } from "@/app/contexts/ThemeColors";
+import useThemeColors from '@/contexts/ThemeColors';
 import { AntDesign } from "@expo/vector-icons";
 import ThemedScroller from '@/components/ThemeScroller';
 import React, { useRef } from 'react';
@@ -12,7 +12,7 @@ export default function TransactionScreen() {
     const colors = useThemeColors();
     return (
         <>
-            <Header showBackButton  />
+            <Header showBackButton />
             <ThemedScroller className=' pt-4'>
                 <View className='items-center'>
                     <View className='w-24 h-24 bg-secondary rounded-full items-center justify-center'>

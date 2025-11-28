@@ -6,7 +6,7 @@ import { Button } from './Button';
 import useShadow, { shadowPresets } from '@/utils/useShadow';
 import Icon from './Icon';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import Favorite from './Favorite';
 const { width: windowWidth } = Dimensions.get('window');
 interface CardProps {
@@ -28,7 +28,7 @@ interface CardProps {
     iconColor?: string;
     imageHeight?: number;
     showOverlay?: boolean;
-    hasFavorite?: boolean;  
+    hasFavorite?: boolean;
     overlayGradient?: readonly [string, string];
     width?: any;
     rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
@@ -111,15 +111,15 @@ const Card: React.FC<CardProps> = ({
 
     const renderContent = () => {
         const cardContent = (
-            <View 
-            
-            className={`flex-1 bg-secondary  dark:bg-dark-secondary ${getRoundedClass()} ${className}`} 
-            style={[
-                hasShadow && { 
-                    ...shadowPresets.card
-                },
-                style
-            ]}>
+            <View
+
+                className={`flex-1 bg-secondary  dark:bg-dark-secondary ${getRoundedClass()} ${className}`}
+                style={[
+                    hasShadow && {
+                        ...shadowPresets.card
+                    },
+                    style
+                ]}>
                 <View className="relative">
                     {hasFavorite && (
                         <View className='absolute top-2 right-2 z-50'>

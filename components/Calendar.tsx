@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleProp, ViewStyle, TouchableOpacity } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import ThemedText from './ThemedText';
 import Icon from './Icon';
 
@@ -43,7 +43,7 @@ export const ThemedCalendar: React.FC<ThemedCalendarProps> = ({
   const currentYear = new Date().getFullYear();
   const selectedYear = new Date(currentMonth).getFullYear();
   const selectedMonthIndex = new Date(currentMonth).getMonth();
-  
+
   const months = [
     'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
@@ -64,25 +64,25 @@ export const ThemedCalendar: React.FC<ThemedCalendarProps> = ({
   return (
     <View className={`rounded-2xl overflow-hidden ${className}`} style={style}>
       {/* Year Navigation */}
-      <View 
+      <View
         style={{ backgroundColor: colors.secondary, borderBottomColor: colors.border, borderBottomWidth: 1 }}
         className="flex-row justify-between items-center px-4 py-3"
       >
         <TouchableOpacity onPress={() => jumpToYear(-1)} className="p-2">
           <Icon name="ChevronLeft" size={20} color={colors.text} />
         </TouchableOpacity>
-        
+
         <ThemedText className="text-lg font-semibold">
           {selectedYear}
         </ThemedText>
-        
+
         <TouchableOpacity onPress={() => jumpToYear(1)} className="p-2">
           <Icon name="ChevronRight" size={20} color={colors.text} />
         </TouchableOpacity>
       </View>
 
       {/* Month Quick Navigation */}
-      <View 
+      <View
         style={{ backgroundColor: colors.secondary }}
         className="px-4 py-2"
       >
@@ -95,14 +95,13 @@ export const ThemedCalendar: React.FC<ThemedCalendarProps> = ({
                 newDate.setMonth(index);
                 setCurrentMonth(newDate.toISOString().split('T')[0]);
               }}
-              className={`px-2 py-1 rounded ${
-                index === selectedMonthIndex ? 'opacity-100' : 'opacity-60'
-              }`}
+              className={`px-2 py-1 rounded ${index === selectedMonthIndex ? 'opacity-100' : 'opacity-60'
+                }`}
               style={{
                 backgroundColor: index === selectedMonthIndex ? colors.highlight : 'transparent'
               }}
             >
-              <ThemedText 
+              <ThemedText
                 className="text-xs font-medium"
                 style={{
                   color: index === selectedMonthIndex ? colors.invert : colors.text

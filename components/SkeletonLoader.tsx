@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Animated, Easing, StyleSheet, Dimensions } from 'react-native';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -46,16 +46,16 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({ variant, count = 1, cla
 
     const renderListItem = () => (
         <View className="flex-row items-center py-4 ">
-            <Animated.View 
+            <Animated.View
                 className="w-16 h-16 rounded-lg"
                 style={[{ opacity, backgroundColor: colors.secondary }]}
             />
             <View className="ml-3 flex-1">
-                <Animated.View 
+                <Animated.View
                     className="h-5 rounded-md mb-2 w-3/4"
                     style={[{ opacity, backgroundColor: colors.secondary }]}
                 />
-                <Animated.View 
+                <Animated.View
                     className="h-4 rounded-md w-1/2"
                     style={[{ opacity, backgroundColor: colors.secondary }]}
                 />
@@ -65,15 +65,15 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({ variant, count = 1, cla
 
     const renderGridItem = () => (
         <View className="w-1/2 p-2">
-            <Animated.View 
+            <Animated.View
                 className="aspect-square rounded-lg mb-2"
                 style={[{ opacity, backgroundColor: colors.secondary }]}
             />
-            <Animated.View 
+            <Animated.View
                 className="h-4 rounded-md mb-1 w-3/4"
                 style={[{ opacity, backgroundColor: colors.secondary }]}
             />
-            <Animated.View 
+            <Animated.View
                 className="h-4 rounded-md w-1/2"
                 style={[{ opacity, backgroundColor: colors.secondary }]}
             />
@@ -82,27 +82,27 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({ variant, count = 1, cla
 
     const renderArticle = () => (
         <View className="flex-1">
-            <Animated.View 
+            <Animated.View
                 style={[{ opacity, backgroundColor: colors.secondary, width: windowWidth, height: windowWidth }]}
             />
             <View className="p-4 flex-1">
-                <Animated.View 
+                <Animated.View
                     className="h-8 rounded-md mb-4 w-3/4"
                     style={[{ opacity, backgroundColor: colors.secondary }]}
                 />
-                <Animated.View 
+                <Animated.View
                     className="h-6 rounded-md mb-4 w-1/2"
                     style={[{ opacity, backgroundColor: colors.secondary }]}
                 />
-                <Animated.View 
+                <Animated.View
                     className="h-4 rounded-md mb-2 w-full"
                     style={[{ opacity, backgroundColor: colors.secondary }]}
                 />
-                <Animated.View 
+                <Animated.View
                     className="h-4 rounded-md mb-2 w-full"
                     style={[{ opacity, backgroundColor: colors.secondary }]}
                 />
-                <Animated.View 
+                <Animated.View
                     className="h-4 rounded-md w-3/4"
                     style={[{ opacity, backgroundColor: colors.secondary }]}
                 />
@@ -114,7 +114,7 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({ variant, count = 1, cla
         <View className="p-4">
             <View className="flex-row justify-start mb-4">
                 <View className="w-3/4">
-                    <Animated.View 
+                    <Animated.View
                         className="h-12 rounded-2xl"
                         style={[{ opacity, backgroundColor: colors.secondary }]}
                     />
@@ -122,7 +122,7 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({ variant, count = 1, cla
             </View>
             <View className="flex-row justify-end mb-4">
                 <View className="w-3/4">
-                    <Animated.View 
+                    <Animated.View
                         className="h-16 rounded-2xl"
                         style={[{ opacity, backgroundColor: colors.secondary }]}
                     />
@@ -130,7 +130,7 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({ variant, count = 1, cla
             </View>
             <View className="flex-row justify-start">
                 <View className="w-2/4">
-                    <Animated.View 
+                    <Animated.View
                         className="h-12 rounded-2xl"
                         style={[{ opacity, backgroundColor: colors.secondary }]}
                     />

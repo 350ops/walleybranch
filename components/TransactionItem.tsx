@@ -1,4 +1,4 @@
-import { useThemeColors } from "@/app/contexts/ThemeColors";
+import useThemeColors from '@/contexts/ThemeColors';
 import ThemedText from "@/components/ThemedText";
 import { AntDesign } from "@expo/vector-icons";
 import { Link } from "expo-router";

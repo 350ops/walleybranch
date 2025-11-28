@@ -1,4 +1,5 @@
 import * as ImagePicker from 'expo-image-picker';
+
 import { useState } from 'react';
 import { View, Image, Pressable, Dimensions, Text, ScrollView } from 'react-native';
 import Icon from './Icon';
@@ -26,7 +27,7 @@ export const MultipleImagePicker: React.FC<MultipleImagePickerProps> = ({ onImag
 
     const pickImage = async (isMain: boolean = false) => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: 'All',
             allowsEditing: false,
             aspect: [5, 4],
             quality: 1,
@@ -65,9 +66,9 @@ export const MultipleImagePicker: React.FC<MultipleImagePickerProps> = ({ onImag
                 ) : (
                     hasMainImage && (
                         <Pressable onPress={() => pickImage(true)} className='w-28 relative h-28 border border-black dark:border-white rounded-xl p-4 flex flex-col items-center justify-center' android_ripple={{ color: 'rgba(0,0,0,0.3)', borderless: false }}>
-                            <Icon name="Camera" size={24}  />
-                        <Text className='text-black dark:text-white text-xs w-full text-center absolute bottom-4'>Main photo</Text>
-                    </Pressable>
+                            <Icon name="Camera" size={24} />
+                            <Text className='text-black dark:text-white text-xs w-full text-center absolute bottom-4'>Main photo</Text>
+                        </Pressable>
                     )
                 )}
                 {[...Array(4)].map((_, index) => {

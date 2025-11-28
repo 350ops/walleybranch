@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, TextInput as RNTextInput, Animated, Pressable, TextInputProps } from 'react-native';
 import Icon, { IconName } from '../Icon';
 import ThemedText from '../ThemedText';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { InputVariant } from './Input';
 
 interface CustomTextInputProps extends TextInputProps {
@@ -48,11 +48,11 @@ const TextInput: React.FC<CustomTextInputProps> = ({
   useEffect(() => {
     if (variant !== 'classic') {
       const hasValue = localValue !== '';
-    Animated.timing(animatedLabelValue, {
+      Animated.timing(animatedLabelValue, {
         toValue: (isFocused || hasValue) ? 1 : 0,
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
+        duration: 200,
+        useNativeDriver: false,
+      }).start();
     }
   }, [isFocused, localValue, animatedLabelValue, variant]);
 
@@ -89,26 +89,26 @@ const TextInput: React.FC<CustomTextInputProps> = ({
   const renderRightIcon = () => {
     if (isPassword) {
       return (
-        <Pressable 
-          onPress={togglePasswordVisibility} 
+        <Pressable
+          onPress={togglePasswordVisibility}
           className={`absolute right-3 ${variant === 'classic' ? 'top-[18px]' : 'top-[18px]'} z-10`}
         >
           <Icon name={showPassword ? 'EyeOff' : 'Eye'} size={20} color={colors.text} />
         </Pressable>
       );
     }
-    
+
     if (rightIcon) {
       return (
-        <Pressable 
-          onPress={onRightIconPress} 
+        <Pressable
+          onPress={onRightIconPress}
           className={`absolute right-3 ${variant === 'classic' ? 'top-[18px]' : 'top-[18px]'} z-10`}
         >
           <Icon name={rightIcon} size={20} color={colors.text} />
         </Pressable>
       );
     }
-    
+
     return null;
   };
 
@@ -256,37 +256,37 @@ const TextInput: React.FC<CustomTextInputProps> = ({
         style={{ position: 'absolute', left: -6, top: 0 }}
         onPress={() => inputRef.current?.focus()}
       >
-          <Animated.Text 
-            style={[labelStyle]} 
+        <Animated.Text
+          style={[labelStyle]}
           className="bg-background text-text"
-          >
-            {label}
-          </Animated.Text>
-        </Pressable>
-        
-        <RNTextInput
-          ref={inputRef}
+        >
+          {label}
+        </Animated.Text>
+      </Pressable>
+
+      <RNTextInput
+        ref={inputRef}
         className={`border rounded-lg py-3 px-3 ${isMultiline ? 'h-36 pt-4' : 'h-14'} ${(isPassword || rightIcon) ? 'pr-10' : ''} 
             text-text bg-transparent
             ${isFocused ? 'border-border' : 'border-border'}
             ${error ? 'border-red-500' : ''}
             ${disabled ? 'opacity-50' : ''}
             ${className}`}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         value={localValue}
         onChangeText={handleChangeText}
-          secureTextEntry={isPassword && !showPassword}
-          placeholderTextColor="transparent"
+        secureTextEntry={isPassword && !showPassword}
+        placeholderTextColor="transparent"
         numberOfLines={isMultiline ? 4 : 1}
         textAlignVertical={isMultiline ? 'top' : 'center'}
         multiline={isMultiline}
         editable={!disabled}
-          {...props}
-        />
-        
-        {renderRightIcon()}
-      
+        {...props}
+      />
+
+      {renderRightIcon()}
+
       {error && (
         <ThemedText className="text-red-500 text-xs mt-1">{error}</ThemedText>
       )}

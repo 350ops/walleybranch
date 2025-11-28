@@ -8,7 +8,7 @@ import React, { useRef, useState } from 'react';
 import ThemeToggle from '@/components/ThemeToggle';
 import Icon from '@/components/Icon';
 import Section from '@/components/layout/Section';
-import useThemeColors from '../contexts/ThemeColors';
+import useThemeColors from "@/contexts/ThemeColors";
 import MultiStep, { Step } from '@/components/MultiStep';
 import { router } from 'expo-router';
 import Select from '@/components/forms/Select';

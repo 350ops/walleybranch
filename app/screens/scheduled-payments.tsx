@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, Image } from 'react-native';
 import Header, { HeaderIcon } from '@/components/Header';
 import ThemedText from '@/components/ThemedText';
-import { useThemeColors } from "@/app/contexts/ThemeColors";
+import useThemeColors from '@/contexts/ThemeColors';
 import { AntDesign } from "@expo/vector-icons";
 import ThemedScroller from '@/components/ThemeScroller';
 import React, { useRef, useState } from 'react';
@@ -73,7 +73,7 @@ const scheduledPaymentsData: ScheduledPayment[] = [
         status: 'upcoming',
         frequency: 'monthly'
     },
-    
+
     // Completed Payments
     {
         id: '6',
@@ -103,7 +103,7 @@ const scheduledPaymentsData: ScheduledPayment[] = [
         status: 'completed',
         frequency: 'monthly'
     },
-    
+
     // Failed Payment
     {
         id: '9',
@@ -130,8 +130,8 @@ export default function ScheduledPaymentsScreen() {
 
     // Group payments by status
     const groupedPayments = filteredPayments.reduce((groups, payment) => {
-        const status = payment.status === 'upcoming' ? 'Upcoming Payments' : 
-                     payment.status === 'completed' ? 'Completed' : 'Failed';
+        const status = payment.status === 'upcoming' ? 'Upcoming Payments' :
+            payment.status === 'completed' ? 'Completed' : 'Failed';
         if (!groups[status]) {
             groups[status] = [];
         }
@@ -237,26 +237,26 @@ const ScheduledPaymentItem: React.FC<ScheduledPaymentItemProps> = ({
         <TouchableOpacity activeOpacity={0.9} className="flex-row items-center py-6 border-b border-border">
             <View className="mr-4">
 
-                    <Avatar src={avatar} size='md' name={recipientName}  />
-               
+                <Avatar src={avatar} size='md' name={recipientName} />
+
             </View>
-            
+
             <View className="flex-1">
                 <View className="flex-row items-center justify-between mb-1">
                     <ThemedText className="text-lg font-semibold">{recipientName}</ThemedText>
                     <ThemedText className="text-lg font-bold">{amount}</ThemedText>
                 </View>
-                
+
                 <View className="flex-row items-center justify-between">
                     <View className="flex-1 mr-4">
                         <ThemedText className="text-sm opacity-60" numberOfLines={1}>
                             {description}
                         </ThemedText>
-                     
+
                     </View>
-                    
+
                     <View className="flex-row items-center">
-                        
+
                         <ThemedText className="text-sm opacity-60 capitalize">
                             {status}
                         </ThemedText>

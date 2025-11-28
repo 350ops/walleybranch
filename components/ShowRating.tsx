@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ThemedText from './ThemedText';
-import { useThemeColors } from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 
 interface ShowRatingProps {
     rating: number;
@@ -24,9 +24,9 @@ const ShowRating: React.FC<ShowRatingProps> = ({
     style,
 }) => {
     const colors = useThemeColors();
-    
+
     const starColor = color || colors.text;
-    
+
     const getSize = () => {
         switch (size) {
             case 'sm': return { icon: 12, text: 'text-xs' };
@@ -39,22 +39,22 @@ const ShowRating: React.FC<ShowRatingProps> = ({
     if (displayMode === 'number') {
         return (
             <View className={`flex-row  items-center gap-x-1 ${className}`} style={style}>
-                <Ionicons 
-                    name="star" 
-                    size={getSize().icon} 
+                <Ionicons
+                    name="star"
+                    size={getSize().icon}
                     color={starColor}
                 />
-                <ThemedText 
+                <ThemedText
                     className={`font-medium ${getSize().text}`}
                     style={color ? { color: starColor } : undefined}
                 >
                     {rating.toFixed(1)}
                 </ThemedText>
-                
+
             </View>
         );
     }
-    
+
     return (
         <View className={`flex-row gap-0.5 ${className}`}>
             {[...Array(maxRating)].map((_, index) => (

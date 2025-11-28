@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Pressable } from 'react-native';
 import ThemedText from '../ThemedText';
 import Icon from '../Icon';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 
 interface CheckboxProps {
     label: string;
@@ -20,13 +20,13 @@ const Checkbox: React.FC<CheckboxProps> = ({
     className = '',
 }) => {
     const colors = useThemeColors();
-    
+
     // Internal state if no onChange provided (for mockups)
     const [internalChecked, setInternalChecked] = React.useState(checked);
-    
+
     // Use either the controlled prop or internal state
     const isChecked = onChange ? checked : internalChecked;
-    
+
     const handlePress = () => {
         if (onChange) {
             onChange(!isChecked);

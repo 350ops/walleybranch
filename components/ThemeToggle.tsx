@@ -1,5 +1,5 @@
 import { Pressable, View } from 'react-native';
-import { useTheme } from '@/app/contexts/ThemeContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import Feather from '@expo/vector-icons/Feather';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { useEffect } from 'react';
@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
-  const translateX = useSharedValue(isDark ? 36 : 3.5); 
+  const translateX = useSharedValue(isDark ? 36 : 3.5);
 
   useEffect(() => {
     translateX.value = withSpring(isDark ? 36 : 3.5, {
@@ -23,12 +23,12 @@ const ThemeToggle = () => {
   });
 
   return (
-    <Pressable 
+    <Pressable
       onPress={toggleTheme}
       className='w-20 h-10 p-1 bg-secondary relative flex-row rounded-full items-center justify-between'>
       <Icon icon='sun' />
       <Icon icon='moon' />
-      <Animated.View 
+      <Animated.View
         style={[animatedStyle]}
         className="w-9 h-9 bg-background rounded-full items-center justify-center flex flex-row absolute"
       />

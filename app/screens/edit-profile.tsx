@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, Pressable } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Image, TouchableOpacity, Pressable, Alert } from 'react-native';
+import { useRouter } from 'expo-router';
+import { authApi } from '@/lib/auth-api';
 import * as ImagePicker from 'expo-image-picker';
+
 import Header from '@/components/Header';
 import ThemedScroller from '@/components/ThemeScroller';
 import Input from '@/components/forms/Input';
@@ -11,11 +14,36 @@ import ThemedText from '@/components/ThemedText';
 
 export default function EditProfileScreen() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    loadProfile();
+  }, []);
+
+  const loadProfile = async () => {
+    try {
+      const profile = await authApi.getUserProfile();
+      if (profile) {
+        // Split full name into first and last name
+        const names = (profile.full_name || '').split(' ');
+        setFirstName(names[0] || '');
+        setLastName(names.slice(1).join(' ') || '');
+        setEmail(profile.email || '');
+        setProfileImage(profile.avatar_url || null);
+      }
+    } catch (error) {
+      console.error('Error loading profile:', error);
+    }
+  };
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: 'images',
       allowsEditing: true,
       aspect: [1, 1],
       quality: 1,
@@ -26,12 +54,42 @@ export default function EditProfileScreen() {
     }
   };
 
+  const handleSave = async () => {
+    setIsLoading(true);
+    try {
+      let avatarUrl = profileImage;
+
+      // If profileImage is a local URI (starts with file://), upload it
+      if (profileImage && (profileImage.startsWith('file://') || profileImage.startsWith('content://'))) {
+        avatarUrl = await authApi.uploadProfileImage(profileImage);
+      }
+
+      const fullName = `${firstName} ${lastName}`.trim();
+      await authApi.updateUserProfile({
+        full_name: fullName,
+        avatar_url: avatarUrl,
+        updated_at: new Date(),
+      });
+      Alert.alert('Success', 'Profile updated successfully');
+      router.back();
+    } catch (error: any) {
+      console.error(error);
+      Alert.alert('Error', error.message || 'Failed to update profile');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <Header showBackButton
         title="Profile Settings"
         rightComponents={[
-          <Button title="Save changes" />
+          <Button
+            title={isLoading ? "Saving..." : "Save changes"}
+            onPress={handleSave}
+            disabled={isLoading}
+          />
         ]}
       />
       <ThemedScroller>
@@ -70,25 +128,26 @@ export default function EditProfileScreen() {
         <Section titleSize='xl' className='pt-4 pb-8' title="Personal information" subtitle="Manage your personal information">
           <Input
             label="First Name"
-            value="John"
-            keyboardType="email-address"
-            autoCapitalize="none"
+            value={firstName}
+            onChangeText={setFirstName}
+            autoCapitalize="words"
             containerClassName='mt-8' />
           <Input
             label="Last Name"
-            value="Doe"
+            value={lastName}
+            onChangeText={setLastName}
             containerClassName='flex-1'
-            keyboardType="email-address"
-            autoCapitalize="none" />
+            autoCapitalize="words" />
 
           <Input
             label="Email"
+            value={email}
+            editable={false} // Email usually shouldn't be editable directly here without re-verification
             keyboardType="email-address"
-            value="john.doe@example.com"
             autoCapitalize="none" />
         </Section>
 
-      
+
 
 
       </ThemedScroller>

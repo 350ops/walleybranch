@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, Image } from 'react-native';
 import Header, { HeaderIcon } from '@/components/Header';
 import ThemedText from '@/components/ThemedText';
-import { useThemeColors } from "@/app/contexts/ThemeColors";
+import useThemeColors from '@/contexts/ThemeColors';
 import { AntDesign } from "@expo/vector-icons";
 import ThemedScroller from '@/components/ThemeScroller';
 import React, { useRef, useState } from 'react';
@@ -64,7 +64,7 @@ const paymentRequestsData: PaymentRequest[] = [
         avatar: require('@/assets/img/user-4.jpg'),
         dueDate: 'Feb 1, 2025'
     },
-    
+
     // Completed Requests
     {
         id: '5',
@@ -90,7 +90,7 @@ const paymentRequestsData: PaymentRequest[] = [
         requestDate: 'Jan 18, 2025',
         status: 'completed'
     },
-    
+
     // Expired Requests
     {
         id: '8',
@@ -116,8 +116,8 @@ export default function PaymentRequestsScreen() {
 
     // Group requests by status
     const groupedRequests = filteredRequests.reduce((groups, request) => {
-        const status = request.status === 'pending' ? 'Pending Requests' : 
-                     request.status === 'completed' ? 'Completed' : 'Expired';
+        const status = request.status === 'pending' ? 'Pending Requests' :
+            request.status === 'completed' ? 'Completed' : 'Expired';
         if (!groups[status]) {
             groups[status] = [];
         }
@@ -217,25 +217,25 @@ const PaymentRequestItem: React.FC<PaymentRequestItemProps> = ({
     return (
         <TouchableOpacity activeOpacity={0.9} className="flex-row items-center py-6 border-b border-border">
             <View className="mr-4">
-                <Avatar src={avatar} size='md' name={fromName}  />
+                <Avatar src={avatar} size='md' name={fromName} />
             </View>
-            
+
             <View className="flex-1">
                 <View className="flex-row items-center justify-between mb-1">
                     <ThemedText className="text-lg font-semibold">{fromName}</ThemedText>
                     <ThemedText className="text-lg font-bold">{amount}</ThemedText>
                 </View>
-                
+
                 <View className="flex-row items-center justify-between">
                     <View className="flex-1 mr-4">
                         <ThemedText className="text-sm opacity-60" numberOfLines={1}>
                             {description}
                         </ThemedText>
-                       
+
                     </View>
-                    
+
                     <View className="flex-row items-center">
-                            
+
                         <ThemedText className="text-sm opacity-60">
                             {getStatusText()}
                         </ThemedText>

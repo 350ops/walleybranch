@@ -1,7 +1,7 @@
 import { View, TouchableOpacity } from 'react-native';
 import Header, { HeaderIcon } from '@/components/Header';
 import ThemedText from '@/components/ThemedText';
-import { useThemeColors } from "@/app/contexts/ThemeColors";
+import useThemeColors from '@/contexts/ThemeColors';
 import { AntDesign } from "@expo/vector-icons";
 import ThemedScroller from '@/components/ThemeScroller';
 import React, { useRef, useState } from 'react';
@@ -58,7 +58,7 @@ const recurringPaymentsData: RecurringPayment[] = [
         icon: 'play',
         category: 'Entertainment'
     },
-    
+
     // Software & Apps
     {
         id: '4',
@@ -93,7 +93,7 @@ const recurringPaymentsData: RecurringPayment[] = [
         icon: 'cloud',
         category: 'Software'
     },
-    
+
     // Fitness & Health
     {
         id: '7',
@@ -117,7 +117,7 @@ const recurringPaymentsData: RecurringPayment[] = [
         icon: 'heart',
         category: 'Health'
     },
-    
+
     // Utilities & Services
     {
         id: '9',
@@ -249,20 +249,20 @@ const RecurringPaymentItem: React.FC<RecurringPaymentItemProps> = ({
                     </View>
                 )}
             </View>
-            
+
             <View className="flex-1">
                 <View className="flex-row items-center justify-between mb-1">
                     <ThemedText className="text-lg font-semibold">{title}</ThemedText>
                     <ThemedText className="text-lg font-bold">{amount}</ThemedText>
                 </View>
-                
+
                 <View className="flex-row items-center justify-between">
                     <View className="flex-row items-center">
                         <ThemedText className="text-sm opacity-60 mr-2">{frequency}</ThemedText>
                         <View className="w-1 h-1 bg-text opacity-60 rounded-full mr-2" />
                         <ThemedText className="text-sm opacity-60">•••• {cardLast4}</ThemedText>
                     </View>
-                    
+
                     <View className="flex-row items-center">
                         <View className={`w-2 h-2 rounded-full mr-2 ${isActive ? 'bg-green-500' : 'bg-red-500'}`} />
                         <ThemedText className="text-sm opacity-60">

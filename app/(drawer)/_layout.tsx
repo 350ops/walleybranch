@@ -1,9 +1,9 @@
 import React from 'react';
 import { Drawer } from 'expo-router/drawer';
-import { useThemeColors } from '../contexts/ThemeColors';
+import useThemeColors from '../../contexts/ThemeColors';
 import CustomDrawerContent from '@/components/CustomDrawerContent';
 import { useFonts, Outfit_400Regular, Outfit_700Bold } from '@expo-google-fonts/outfit';
-import { DrawerProvider } from '../contexts/DrawerContext';
+import { DrawerProvider } from '../../contexts/DrawerContext';
 // Create a ref to the drawer instance that can be used across the app
 export const drawerRef = React.createRef();
 

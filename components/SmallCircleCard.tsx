@@ -1,6 +1,6 @@
 import { View, Animated } from "react-native";
 import ThemedText from "./ThemedText";
-import useThemeColors from "@/app/contexts/ThemeColors";
+import useThemeColors from '@/contexts/ThemeColors';
 import { useRef, useCallback } from "react";
 import Icon from "./Icon";
 import { useFocusEffect } from "@react-navigation/native";
@@ -30,18 +30,18 @@ export const SmallCircleCard = ({
     size = 80
 }: SmallCircleCardProps) => {
     const colors = useThemeColors();
-    
+
     // Animation
     const animatedValue = useRef(new Animated.Value(0)).current;
-    
+
     // Circle calculations
     const strokeWidth = 4;
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
-    
+
     const animateProgress = useCallback(() => {
         animatedValue.setValue(0);
-        
+
         Animated.timing(animatedValue, {
             toValue: percentage,
             duration: 1500,
@@ -65,7 +65,7 @@ export const SmallCircleCard = ({
                     {subtitle}
                 </ThemedText>
             )}
-            
+
             {/* Circle Progress Chart */}
             <View className="items-center mt-4 mb-2">
                 <View className="relative items-center justify-center" style={{ width: size, height: size }}>
@@ -106,7 +106,7 @@ export const SmallCircleCard = ({
                     </View>
                 </View>
             </View>
-            
+
             {value && (
                 <View className="w-full pt-4 mt-2 border-t border-border flex-row justify-between">
                     <View className="flex-row items-end">
