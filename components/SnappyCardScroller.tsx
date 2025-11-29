@@ -21,30 +21,25 @@ interface SnappyCardScrollerProps {
 
 export function SnappyCardScroller({ cards = [], addCard }: SnappyCardScrollerProps) {
   const scrollViewRef = useRef<ScrollView>(null);
-  
-  // Handle empty cards array
-  if (!cards || cards.length === 0) {
-    return addCard ? (
-      <View>
-        {addCard}
-      </View>
-    ) : null;
-  }
-  
-  const data = addCard ? [{ id: 'add', isAddCard: true }, ...cards] : cards;
+  const hasCards = !!cards && cards.length > 0;
+  const data = hasCards ? (addCard ? [{ id: 'add', isAddCard: true }, ...cards] : cards) : [];
 
   // Auto-scroll to middle card on mount
   useEffect(() => {
+    if (!hasCards) return;
     const timer = setTimeout(() => {
       if (scrollViewRef.current) {
         const initialIndex = addCard ? 1 : Math.floor(cards.length / 2);
         const offset = initialIndex * (CARD_WIDTH + CARD_SPACING);
         scrollViewRef.current.scrollTo({ x: offset, animated: true });
       }
-    }, 100); // Small delay to ensure ScrollView is rendered
-
+    }, 100);
     return () => clearTimeout(timer);
-  }, [cards.length, addCard]);
+  }, [hasCards, cards.length, addCard]);
+
+  if (!hasCards) {
+    return addCard ? <View>{addCard}</View> : null;
+  }
 
   return (
     <View>

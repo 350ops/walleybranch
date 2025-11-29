@@ -11,7 +11,7 @@ export const useThemeColors = () => {
     secondary: isDark ? '#1F1E1F' : '#ffffff',
     state: isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)',
     sheet: isDark ? '#262626' : '#ffffff',
-    highlight: '#9FE870',    
+    highlight: '#9FE870',
     lightDark: isDark ? '#262626' : 'white',
     border: isDark ? '#404040' : '#E2E8F0',
     text: isDark ? 'white' : 'black',

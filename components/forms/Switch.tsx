@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, Pressable, Animated, Switch as RNSwitch, TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 import ThemedText from '../ThemedText';
 import Icon, { IconName } from '../Icon';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 
 interface SwitchProps {
   value?: boolean;
@@ -47,17 +47,17 @@ const Switch: React.FC<SwitchProps> = ({
 
   const toggleSwitch = () => {
     if (disabled) return;
-    
+
     const newValue = !switchValue;
-    
+
     // Update internal state if uncontrolled
     if (!isControlled) {
       setIsOn(newValue);
     }
-    
+
     // Call callback if provided
     onChange?.(newValue);
-    
+
     // Animate the switch
     Animated.spring(slideAnim, {
       toValue: newValue ? 1 : 0,
@@ -68,9 +68,9 @@ const Switch: React.FC<SwitchProps> = ({
   };
 
   return (
-    <TouchableOpacity 
+    <TouchableOpacity
       activeOpacity={0.7}
-      onPress={toggleSwitch} 
+      onPress={toggleSwitch}
       disabled={disabled}
       className={`flex-row items-center py-1 ${disabled ? 'opacity-100' : ''} ${className}`}
       style={style}
@@ -80,7 +80,7 @@ const Switch: React.FC<SwitchProps> = ({
           <Icon name={icon} size={20} color={colors.text} />
         </View>
       )}
-      
+
       <View className="flex-1">
         {label && (
           <ThemedText className="font-semibold text-lg">{label}</ThemedText>
@@ -91,24 +91,24 @@ const Switch: React.FC<SwitchProps> = ({
           </ThemedText>
         )}
       </View>
-      
 
-        <View className="w-14 h-8 rounded-full">
-          <View
-            className={`w-full h-full border border-border rounded-full absolute ${switchValue ? 'bg-highlight' : 'bg-secondary'}`}
-          />
-          <Animated.View
-            style={{
-              transform: [{
-                translateX: slideAnim.interpolate({
-                  inputRange: [-0.2, 1.2],
-                  outputRange: [1, 28]
-                })
-              }]
-            }}
-            className="w-6 h-6 bg-white rounded-full shadow-sm my-1 border border-border"
-          />
-        </View>
+
+      <View className="w-14 h-8 rounded-full">
+        <View
+          className={`w-full h-full border border-border rounded-full absolute ${switchValue ? 'bg-highlight' : 'bg-secondary'}`}
+        />
+        <Animated.View
+          style={{
+            transform: [{
+              translateX: slideAnim.interpolate({
+                inputRange: [-0.2, 1.2],
+                outputRange: [1, 28]
+              })
+            }]
+          }}
+          className="w-6 h-6 bg-white rounded-full shadow-sm my-1 border border-border"
+        />
+      </View>
     </TouchableOpacity>
   );
 };

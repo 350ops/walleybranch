@@ -4,7 +4,7 @@ import { Link, router } from 'expo-router';
 import Input from '@/components/forms/Input';
 import ThemedText from '@/components/ThemedText';
 import { Button } from '@/components/Button';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
@@ -151,81 +151,81 @@ export default function SignupScreen() {
           >
             <AnimatedView duration={500} delay={200} animation='slideInBottom' className='p-4 w-full'>
 
-                <View className="p-6 bg-background rounded-3xl border border-border">
-                  <View className='items-center justify-center mb-6'>
-                    <ThemedText className="text-3xl font-outfit-bold">Sign up</ThemedText>
-                    <ThemedText className="text-sm ">Enter your details below</ThemedText>
-                  </View>
-
-                  <Input
-                    label="Email"
-                    //leftIcon="mail"
-                    value={email}
-                    onChangeText={(text) => {
-                      setEmail(text);
-                      if (emailError) validateEmail(text);
-                    }}
-                    error={emailError}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    autoComplete="email"
-                  />
-
-                  <Input
-                    label="Password"
-                    //leftIcon="lock"
-                    value={password}
-                    onChangeText={(text) => {
-                      setPassword(text);
-                      checkPasswordStrength(text);
-                      if (passwordError) validatePassword(text);
-                    }}
-                    error={passwordError}
-                    isPassword={true}
-                    autoCapitalize="none"
-                  />
-
-                  <Input
-                    label="Confirm password"
-                    //leftIcon="lock"
-                    value={confirmPassword}
-                    onChangeText={(text) => {
-                      setConfirmPassword(text);
-                      if (confirmPasswordError) validateConfirmPassword(text);
-                    }}
-                    error={confirmPasswordError}
-                    isPassword={true}
-                    autoCapitalize="none"
-                  />
-                  {password.length > 0 && (
-                    <View className="mb-4">
-                      <View className="w-full h-1 bg-secondary  dark:bg-dark-secondary rounded-full overflow-hidden">
-                        <View
-                          className={`h-full rounded-full ${passwordStrength >= 75 ? 'bg-green-500' : passwordStrength >= 50 ? 'bg-yellow-500' : 'bg-red-500'}`}
-                          style={{ width: `${passwordStrength}%` }}
-                        />
-                      </View>
-                      <ThemedText className="text-xs mt-1 text-light-subtext dark:text-dark-subtext">
-                        {strengthText}
-                      </ThemedText>
-                    </View>
-                  )}
-
-                  <Button
-                    title="Sign up"
-                    onPress={handleSignup}
-                    loading={isLoading}
-                    size="large"
-                    className="mb-4 !bg-highlight"
-                    textClassName='text-black'
-                    rounded="full"
-                  />
-
-                  <View className="flex-row justify-center">
-                    <ThemedText className="text-sm opacity-50">By signing up you agree to our Terms & Conditions </ThemedText>
-
-                  </View>
+              <View className="p-6 bg-background rounded-3xl border border-border">
+                <View className='items-center justify-center mb-6'>
+                  <ThemedText className="text-3xl font-outfit-bold">Sign up</ThemedText>
+                  <ThemedText className="text-sm ">Enter your details below</ThemedText>
                 </View>
+
+                <Input
+                  label="Email"
+                  //leftIcon="mail"
+                  value={email}
+                  onChangeText={(text) => {
+                    setEmail(text);
+                    if (emailError) validateEmail(text);
+                  }}
+                  error={emailError}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoComplete="email"
+                />
+
+                <Input
+                  label="Password"
+                  //leftIcon="lock"
+                  value={password}
+                  onChangeText={(text) => {
+                    setPassword(text);
+                    checkPasswordStrength(text);
+                    if (passwordError) validatePassword(text);
+                  }}
+                  error={passwordError}
+                  isPassword={true}
+                  autoCapitalize="none"
+                />
+
+                <Input
+                  label="Confirm password"
+                  //leftIcon="lock"
+                  value={confirmPassword}
+                  onChangeText={(text) => {
+                    setConfirmPassword(text);
+                    if (confirmPasswordError) validateConfirmPassword(text);
+                  }}
+                  error={confirmPasswordError}
+                  isPassword={true}
+                  autoCapitalize="none"
+                />
+                {password.length > 0 && (
+                  <View className="mb-4">
+                    <View className="w-full h-1 bg-secondary  dark:bg-dark-secondary rounded-full overflow-hidden">
+                      <View
+                        className={`h-full rounded-full ${passwordStrength >= 75 ? 'bg-green-500' : passwordStrength >= 50 ? 'bg-yellow-500' : 'bg-red-500'}`}
+                        style={{ width: `${passwordStrength}%` }}
+                      />
+                    </View>
+                    <ThemedText className="text-xs mt-1 text-light-subtext dark:text-dark-subtext">
+                      {strengthText}
+                    </ThemedText>
+                  </View>
+                )}
+
+                <Button
+                  title="Sign up"
+                  onPress={handleSignup}
+                  loading={isLoading}
+                  size="large"
+                  className="mb-4 !bg-highlight"
+                  textClassName='text-black'
+                  rounded="full"
+                />
+
+                <View className="flex-row justify-center">
+                  <ThemedText className="text-sm opacity-50">By signing up you agree to our Terms & Conditions </ThemedText>
+
+                </View>
+              </View>
             </AnimatedView>
           </KeyboardAvoidingView>
         </ScrollView>

@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { Text, View, TouchableOpacity, ViewStyle, Image, ImageSourcePropType } from 'react-native';
 import { Link } from 'expo-router';
 import Icon, { IconName } from './Icon';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 type ChipSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
 interface ChipProps {
@@ -77,30 +77,30 @@ export const Chip = ({
     if (leftContent) {
       return leftContent;
     }
-    
+
     if (icon) {
       return (
-        <Icon 
-          name={icon} 
-          size={getDefaultIconSize()} 
-          color={iconColor || (isChipSelected ? colors.icon : colors.icon)} 
-          className="mr-2 -ml-1" 
+        <Icon
+          name={icon}
+          size={getDefaultIconSize()}
+          color={iconColor || (isChipSelected ? colors.icon : colors.icon)}
+          className="mr-2 -ml-1"
         />
       );
     }
-    
+
     if (image) {
       return (
         <Image className='rounded-lg mr-2 -ml-2'
-          source={image} 
-          style={{ 
-            width: getDefaultImageSize(), 
-            height: getDefaultImageSize(), 
-          }} 
+          source={image}
+          style={{
+            width: getDefaultImageSize(),
+            height: getDefaultImageSize(),
+          }}
         />
       );
     }
-    
+
     return null;
   };
 
@@ -124,12 +124,12 @@ export const Chip = ({
   // Wrapper with appropriate styling
   const chipWrapper = (children: ReactNode) => (
 
-      <View
-        className={`${className} ${paddingClasses} rounded-full ${isChipSelected ? 'bg-highlight' : 'bg-secondary'} flex-row items-center justify-center`}
-        style={style}
-      >
-        {children}
-      </View>
+    <View
+      className={`${className} ${paddingClasses} rounded-full ${isChipSelected ? 'bg-highlight' : 'bg-secondary'} flex-row items-center justify-center`}
+      style={style}
+    >
+      {children}
+    </View>
   );
 
   // Return either a Link or TouchableOpacity based on props

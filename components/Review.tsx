@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ViewStyle } from 'react-native';
 import ThemedText from './ThemedText';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import Icon from './Icon';
 import Avatar from './Avatar';
 
@@ -25,16 +25,16 @@ const Review: React.FC<ReviewProps> = ({
   style
 }) => {
   const colors = useThemeColors();
-  
+
   const renderStars = () => {
     const stars = [];
-    
+
     for (let i = 0; i < 5; i++) {
       stars.push(
-        <Icon 
+        <Icon
           key={i}
-          name="Star" 
-          size={16} 
+          name="Star"
+          size={16}
           fill={i < rating ? colors.text : 'none'}
           color={i < rating ? colors.text : colors.text}
           strokeWidth={1.5}
@@ -42,7 +42,7 @@ const Review: React.FC<ReviewProps> = ({
         />
       );
     }
-    
+
     return (
       <View className="flex-row items-center">
         {stars}
@@ -55,7 +55,7 @@ const Review: React.FC<ReviewProps> = ({
     <View className={` ${className}`} style={style}>
       <View className="flex-row">
         {(avatar || username) && (
-          <Avatar 
+          <Avatar
             src={avatar}
             name={username}
             size="xs"

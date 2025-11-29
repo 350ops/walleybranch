@@ -1,7 +1,7 @@
 import { View, TouchableOpacity } from 'react-native';
 import Header, { HeaderIcon } from '@/components/Header';
 import ThemedText from '@/components/ThemedText';
-import { useThemeColors } from "@/app/contexts/ThemeColors";
+import useThemeColors from '@/contexts/ThemeColors';
 import { AntDesign } from "@expo/vector-icons";
 import ThemedScroller from '@/components/ThemeScroller';
 import React, { useRef, useState } from 'react';
@@ -74,7 +74,7 @@ const directDebitsData: DirectDebit[] = [
         category: 'Utilities',
         mandateDate: 'Feb 1, 2024'
     },
-    
+
     // Insurance
     {
         id: '5',
@@ -100,7 +100,7 @@ const directDebitsData: DirectDebit[] = [
         category: 'Insurance',
         mandateDate: 'Jan 1, 2024'
     },
-    
+
     // Loans & Finance
     {
         id: '7',
@@ -126,7 +126,7 @@ const directDebitsData: DirectDebit[] = [
         category: 'Loans',
         mandateDate: 'Sep 1, 2023'
     },
-    
+
     // Cancelled
     {
         id: '9',
@@ -263,13 +263,13 @@ const DirectDebitItem: React.FC<DirectDebitItemProps> = ({
                     </View>
                 )}
             </View>
-            
+
             <View className="flex-1">
                 <View className="flex-row items-center justify-between mb-1">
                     <ThemedText className="text-lg font-semibold">{companyName}</ThemedText>
                     <ThemedText className="text-lg font-bold">{amount}</ThemedText>
                 </View>
-                
+
                 <View className="flex-row items-center justify-between">
                     <View className="flex-1 mr-4">
                         <View className="flex-row items-center mb-1">
@@ -277,11 +277,11 @@ const DirectDebitItem: React.FC<DirectDebitItemProps> = ({
                             <View className="w-1 h-1 bg-text opacity-60 rounded-full mr-2" />
                             <ThemedText className="text-sm opacity-60">•••• {accountLast4}</ThemedText>
                         </View>
-                      
+
                     </View>
-                    
+
                     <View className="flex-row items-center">
-                        
+
                         <ThemedText className="text-sm opacity-60">
                             {isActive ? `Next: ${nextPayment}` : 'Cancelled'}
                         </ThemedText>

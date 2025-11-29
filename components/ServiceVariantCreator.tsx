@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon, { IconName } from './Icon';
 import Input from './forms/Input';
 import ThemedText from './ThemedText';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { Button } from './Button';
 
 interface ServiceVariantCreatorProps {
@@ -187,82 +187,82 @@ const ServiceVariantCreator: React.FC<ServiceVariantCreatorProps> = ({ hasStock 
                         <View className='flex-row w-full justify-between px-4'>
 
 
-                        <Pressable onPress={() => setModalVisible(false)} className='w-12 h-12 rounded-full items-start justify-center'>
-                            <Icon name="X" size={25} />
-                        </Pressable>
-
-                        <View className='flex-row'>
-                            <Pressable
-                                onPress={() => {
-                                    Alert.alert(
-                                        "Delete Option",
-                                        "Are you sure you want to delete this option?",
-                                        [
-                                            { text: "Cancel", style: "cancel" },
-                                            { text: "Delete", style: "destructive", onPress: () => deleteOption() },
-                                        ]
-                                    );
-                                }}
-                                className='w-12 h-12  rounded-full items-center justify-center'>
-                            
-                                <Icon name="Trash" size={18} />
+                            <Pressable onPress={() => setModalVisible(false)} className='w-12 h-12 rounded-full items-start justify-center'>
+                                <Icon name="X" size={25} />
                             </Pressable>
-                            <Button onPress={handleSaveOption} title="Save" size="medium" className='bg-black dark:bg-white px-6  items-center ml-2 justify-center'></Button>
+
+                            <View className='flex-row'>
+                                <Pressable
+                                    onPress={() => {
+                                        Alert.alert(
+                                            "Delete Option",
+                                            "Are you sure you want to delete this option?",
+                                            [
+                                                { text: "Cancel", style: "cancel" },
+                                                { text: "Delete", style: "destructive", onPress: () => deleteOption() },
+                                            ]
+                                        );
+                                    }}
+                                    className='w-12 h-12  rounded-full items-center justify-center'>
+
+                                    <Icon name="Trash" size={18} />
+                                </Pressable>
+                                <Button onPress={handleSaveOption} title="Save" size="medium" className='bg-black dark:bg-white px-6  items-center ml-2 justify-center'></Button>
+                            </View>
                         </View>
-                    </View>
-                    <View className="flex-1 mt-8">
-                        <View className="px-4  w-full">
-                            <ThemedText className=' text-xl font-medium'>Option name</ThemedText>
-                            <ThemedText className='text-sm w-full mb-4'>Package type, delivery time, revisions</ThemedText>
-                            <Input label="Name" value={currentOption.name} onChangeText={(text) => setCurrentOption({ ...currentOption, name: text })} />
-                            <ThemedText className='text-xl font-medium mt-8'>Values</ThemedText>
-                            <ThemedText className='text-light-subtext dark:text-dark-subtext text-sm w-full'>Basic, Standard, Premium, etc.</ThemedText>
-                            <FlatList
-                                className='mt-4 border border-neutral-500 rounded-lg relative'
-                                data={currentOption.values}
-                                keyExtractor={(item, index) => index.toString()}
-                                renderItem={({ item, index }) => (
-                                    <View className="flex-row items-center border-b border-neutral-500">
-                                        <TextInput
-                                            className="flex-1 py-3 px-4 dark:text-white dark:placeholder:text-white"
-                                            placeholder="Enter value"
-                                            placeholderTextColor={colors.placeholder}
-                                            value={item}
-                                            onChangeText={(text) => {
-                                                const updatedValues = currentOption.values.map((val, i) => (i === index ? text : val));
+                        <View className="flex-1 mt-8">
+                            <View className="px-4  w-full">
+                                <ThemedText className=' text-xl font-medium'>Option name</ThemedText>
+                                <ThemedText className='text-sm w-full mb-4'>Package type, delivery time, revisions</ThemedText>
+                                <Input label="Name" value={currentOption.name} onChangeText={(text) => setCurrentOption({ ...currentOption, name: text })} />
+                                <ThemedText className='text-xl font-medium mt-8'>Values</ThemedText>
+                                <ThemedText className='text-light-subtext dark:text-dark-subtext text-sm w-full'>Basic, Standard, Premium, etc.</ThemedText>
+                                <FlatList
+                                    className='mt-4 border border-neutral-500 rounded-lg relative'
+                                    data={currentOption.values}
+                                    keyExtractor={(item, index) => index.toString()}
+                                    renderItem={({ item, index }) => (
+                                        <View className="flex-row items-center border-b border-neutral-500">
+                                            <TextInput
+                                                className="flex-1 py-3 px-4 dark:text-white dark:placeholder:text-white"
+                                                placeholder="Enter value"
+                                                placeholderTextColor={colors.placeholder}
+                                                value={item}
+                                                onChangeText={(text) => {
+                                                    const updatedValues = currentOption.values.map((val, i) => (i === index ? text : val));
 
-                                                // If the user is typing in the last input, add a new empty one
-                                                if (index === updatedValues.length - 1 && text !== "") {
-                                                    updatedValues.push("");
-                                                }
+                                                    // If the user is typing in the last input, add a new empty one
+                                                    if (index === updatedValues.length - 1 && text !== "") {
+                                                        updatedValues.push("");
+                                                    }
 
-                                                setCurrentOption({
-                                                    ...currentOption,
-                                                    values: updatedValues
-                                                });
-                                            }}
-                                            onSubmitEditing={Keyboard.dismiss}
-                                        />
-                                        <Pressable onPress={() => removeValue(index)} className="px-3">
-                                            <Icon name="Trash" size={20} />
+                                                    setCurrentOption({
+                                                        ...currentOption,
+                                                        values: updatedValues
+                                                    });
+                                                }}
+                                                onSubmitEditing={Keyboard.dismiss}
+                                            />
+                                            <Pressable onPress={() => removeValue(index)} className="px-3">
+                                                <Icon name="Trash" size={20} />
+                                            </Pressable>
+                                        </View>
+                                    )}
+                                    ListFooterComponent={
+                                        <Pressable
+                                            onPress={addValue}
+                                            className="py-3 px-4 rounded-lg items-center flex-row justify-center"
+                                        >
+                                            <Icon name="Plus" size={20} />
+                                            <ThemedText className="ml-2">Add value</ThemedText>
                                         </Pressable>
-                                    </View>
-                                )}
-                                ListFooterComponent={
-                                    <Pressable
-                                        onPress={addValue}
-                                        className="py-3 px-4 rounded-lg items-center flex-row justify-center"
-                                    >
-                                        <Icon name="Plus" size={20} />
-                                        <ThemedText className="ml-2">Add value</ThemedText>
-                                    </Pressable>
-                                }
-                            />
+                                    }
+                                />
 
+                            </View>
                         </View>
-                    </View>
 
-                </View>
+                    </View>
                 </SafeAreaView>
             </Modal>
 

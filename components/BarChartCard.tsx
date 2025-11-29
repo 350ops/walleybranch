@@ -2,7 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import { View, Animated, Easing } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import ThemedText from './ThemedText';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 
 interface BarChartCardProps {
   data: number[];
@@ -27,7 +27,7 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
 }) => {
   const colors = useThemeColors();
   const chartHeight = height - (showXAxis ? 40 : 10); // Reserve space for X-axis labels
-  
+
   // Animation values for each bar
   const animatedValues = useRef(
     data.map(() => new Animated.Value(0))
@@ -37,7 +37,7 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
   const minValue = 0; // Always start from 0
   const maxValue = 100; // Always end at 100
   const range = 100; // Fixed range
-  
+
   // Default Y-axis labels if not provided - use fixed 0-100 scale
   const defaultYLabels = yAxisLabels || [0, 50, 100];
 
@@ -85,7 +85,7 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
           <View className="h-full flex-row items-end justify-between px-0">
             {data.map((value, index) => {
               const heightPercentage = (value - minValue) / range;
-              
+
               return (
                 <View key={index} className="flex-1 items-center ">
                   <Animated.View
@@ -107,7 +107,7 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
           </View>
         </View>
       </View>
-      
+
       {/* Bottom Axis - Labels */}
       {showXAxis && labels && (
         <View className="flex-row mt-2" style={{ marginLeft: showYAxis ? 32 : 0 }}>

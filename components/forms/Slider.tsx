@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { PanGestureHandler, PanGestureHandlerGestureEvent, TapGestureHandler } from 'react-native-gesture-handler';
 import ThemedText from '../ThemedText';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 
 type SliderSize = 's' | 'm' | 'l';
 
@@ -69,32 +69,32 @@ const Slider = ({
 }: SliderProps) => {
   const colors = useThemeColors();
   const currentSize = sizeStyles[size];
-  
+
   // This assures initialValue takes precedence when value is undefined
   const effectiveInitialValue = initialValue !== undefined ? initialValue : 0;
   const effectiveValue = value !== undefined ? value : effectiveInitialValue;
-  
+
   // Calculate the width of the slider and track absolute positions
   const containerWidth = useSharedValue(0);
-  
+
   // Percentage for positioning (0-1)
   const percentage = useSharedValue(
     maxValue === minValue ? 0 : Math.max(0, Math.min(1, (effectiveValue - minValue) / (maxValue - minValue)))
   );
-  
+
   // Calculate display value from percentage
   const displayValue = useDerivedValue(() => {
     return minValue + percentage.value * (maxValue - minValue);
   });
-  
+
   // When external value changes, update our internal values
   useEffect(() => {
     if (value === undefined || maxValue === minValue) return;
-    
+
     const newPercentage = Math.max(0, Math.min(1, (value - minValue) / (maxValue - minValue)));
     percentage.value = withTiming(newPercentage, { duration: 100 });
   }, [value, minValue, maxValue, percentage]);
-  
+
   // Calculate actual thumb position accounting for thumb size to ensure edge-to-edge movement
   const thumbPosition = useDerivedValue(() => {
     // This creates perfect edge-to-edge movement
@@ -113,28 +113,28 @@ const Slider = ({
     // Get real container width excluding thumb size
     const usableWidth = containerWidth.value - currentSize.thumbSize;
     if (usableWidth <= 0) return;
-    
+
     // Calculate position relative to usable width, accounting for thumb radius offset
-    let newPercentage = Math.max(0, Math.min(1, (x - currentSize.thumbSize/2) / usableWidth));
-    
+    let newPercentage = Math.max(0, Math.min(1, (x - currentSize.thumbSize / 2) / usableWidth));
+
     // Calculate raw value
     const rawValue = minValue + newPercentage * (maxValue - minValue);
-    
+
     // Apply stepping
     let steppedValue;
     if (step > 0) {
       steppedValue = Math.round((rawValue - minValue) / step) * step + minValue;
       steppedValue = Math.min(Math.max(steppedValue, minValue), maxValue);
-      
+
       // Recalculate percentage from stepped value
       newPercentage = (steppedValue - minValue) / (maxValue - minValue);
     } else {
       steppedValue = rawValue;
     }
-    
+
     // Update percentage and notify
     percentage.value = withTiming(newPercentage, { duration: 150 });
-    
+
     if (onValueChange) {
       onValueChange(steppedValue);
     }
@@ -152,27 +152,27 @@ const Slider = ({
       // Calculate position relative to usable width (excluding thumb)
       const usableWidth = containerWidth.value - currentSize.thumbSize;
       if (usableWidth <= 0) return;
-      
+
       let newPercentage = ctx.startPercentage + event.translationX / usableWidth;
       newPercentage = Math.min(Math.max(newPercentage, 0), 1);
-      
+
       // Calculate raw value
       const rawValue = minValue + newPercentage * (maxValue - minValue);
-      
+
       // Apply stepping
       let steppedValue;
       if (step > 0) {
         steppedValue = Math.round((rawValue - minValue) / step) * step + minValue;
         steppedValue = Math.min(Math.max(steppedValue, minValue), maxValue);
-        
+
         // Recalculate percentage from stepped value
         newPercentage = (steppedValue - minValue) / (maxValue - minValue);
       } else {
         steppedValue = rawValue;
       }
-      
+
       percentage.value = newPercentage;
-      
+
       if (onValueChange) {
         runOnJS(onValueChange)(steppedValue);
       }
@@ -181,7 +181,7 @@ const Slider = ({
 
   // Thumb position style
   const thumbStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: thumbPosition.value - currentSize.thumbSize/2 }],
+    transform: [{ translateX: thumbPosition.value - currentSize.thumbSize / 2 }],
   }));
 
   // Active track style
@@ -193,9 +193,9 @@ const Slider = ({
   const onLayout = useCallback((event: LayoutChangeEvent) => {
     const { width } = event.nativeEvent.layout;
     if (width <= 0) return;
-    
+
     containerWidth.value = width;
-    
+
     // Initialize position based on value or initialValue
     if (maxValue !== minValue) {
       const valueToUse = value !== undefined ? value : (initialValue !== undefined ? initialValue : 0);
@@ -223,23 +223,23 @@ const Slider = ({
       {label && (
         <View className="flex-row justify-between mb-2">
           <ThemedText className={currentSize.labelText}>{label}</ThemedText>
-          <Animated.Text 
+          <Animated.Text
             className={`text-text opacity-60 ${currentSize.valueText}`}
           >
             {formatValue.value}
           </Animated.Text>
         </View>
       )}
-      
-      <View 
-        style={{ height: currentSize.containerHeight }} 
+
+      <View
+        style={{ height: currentSize.containerHeight }}
         className="justify-center"
         onLayout={onLayout}
       >
         <TapGestureHandler onHandlerStateChange={handleTapGesture}>
           <Animated.View className="w-full h-full justify-center">
             {/* Background Track */}
-            <View 
+            <View
               style={{
                 position: 'absolute',
                 height: currentSize.trackHeight,
@@ -248,9 +248,9 @@ const Slider = ({
                 width: '100%',
               }}
             />
-            
+
             {/* Active Track */}
-            <Animated.View 
+            <Animated.View
               style={[
                 {
                   position: 'absolute',
@@ -261,10 +261,10 @@ const Slider = ({
                 activeTrackStyle,
               ]}
             />
-            
+
             {/* Thumb */}
             <PanGestureHandler onGestureEvent={panHandler}>
-              <Animated.View 
+              <Animated.View
                 style={[
                   {
                     position: 'absolute',

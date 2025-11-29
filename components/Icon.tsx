@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, View, ViewStyle } from 'react-native';
 import { Link } from 'expo-router';
 import * as LucideIcons from 'lucide-react-native';
-import { useThemeColors } from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { LucideProps } from 'lucide-react-native';
 
 
@@ -72,7 +72,7 @@ const Icon: React.FC<IconProps> = ({
     };
 
     const { container, icon } = getSize();
-    
+
     const classes = [
         'items-center justify-center',
         (variant !== 'plain' && container) ? container : '',

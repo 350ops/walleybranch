@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import ThemedScroller from "@/components/ThemeScroller";
 import Section from "@/components/layout/Section";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import useThemeColors from "../contexts/ThemeColors";
+import useThemeColors from "@/contexts/ThemeColors";
 import { View, TextInput, Pressable } from "react-native";
 import Icon from "@/components/Icon";
 import { Link, router } from "expo-router";
@@ -80,19 +80,19 @@ export default function SearchScreen() {
             <ThemedScroller className="pt-14">
 
                 {allRecipients.map((recipient) => (
-                        <RecipientItem key={recipient.id} name={recipient.name} src={recipient.src} accountEnding={recipient.accountEnding} />
-                    ))}
+                    <RecipientItem key={recipient.id} name={recipient.name} src={recipient.src} accountEnding={recipient.accountEnding} />
+                ))}
             </ThemedScroller>
         </>
     )
-}   
+}
 
 
 const SearchInput = () => {
     const insets = useSafeAreaInsets();
     const colors = useThemeColors();
     return (
-        <View style={{paddingTop: insets.top}} className='flex-row px-4 pb-4 items-center  justify-between'>
+        <View style={{ paddingTop: insets.top }} className='flex-row px-4 pb-4 items-center  justify-between'>
             <View className='relative h-14 flex-1 flex-row  border border-text rounded-full'>
                 <Icon name='ArrowLeft' onPress={() => router.back()} size={20} className='pl-2' />
                 <TextInput className='flex-1 h-14 text-text rounded-xl px-4' placeholder='Search recipients' placeholderTextColor={colors.placeholder} />

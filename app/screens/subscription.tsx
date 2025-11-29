@@ -3,7 +3,7 @@ import { View, Image, TouchableOpacity, Pressable } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Header from '@/components/Header';
 import ThemedScroller from '@/components/ThemeScroller';
-import useThemeColors from '../contexts/ThemeColors';
+import useThemeColors from "@/contexts/ThemeColors";
 import { Button } from '@/components/Button';
 import Icon from '@/components/Icon';
 import ThemedText from '@/components/ThemedText';
@@ -56,14 +56,14 @@ export default function EditProfileScreen() {
                     <Button onPress={() => actionSheetRef.current?.show()} className='!bg-highlight' textClassName='!text-white' size='large' rounded='full' title="Upgrade to plus" />
                 </ThemedFooter>
             </View>
-            <ActionSheetThemed 
-            gestureEnabled
-            containerStyle={{
-                borderTopLeftRadius: 20,
-                borderTopRightRadius: 20,
-                paddingTop: 10,
-            }}
-            ref={actionSheetRef}>
+            <ActionSheetThemed
+                gestureEnabled
+                containerStyle={{
+                    borderTopLeftRadius: 20,
+                    borderTopRightRadius: 20,
+                    paddingTop: 10,
+                }}
+                ref={actionSheetRef}>
                 <View className='px-6 pt-10 items-center'>
                     <Icon name='Check' size={24} className='w-20 h-20 bg-background rounded-full mb-6' />
                     <ThemedText className='font-semibold text-4xl'>All setup</ThemedText>

@@ -1,4 +1,4 @@
-import { useThemeColors } from 'app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { TabTriggerSlotProps } from 'expo-router/ui';
 import { ComponentProps, forwardRef, useEffect, useState, ReactNode } from 'react';
 import { Text, Pressable, View, Animated } from 'react-native';
@@ -50,7 +50,7 @@ export const TabButton = forwardRef<View, TabButtonProps>(
       if (customContent) {
         return customContent;
       }
-      
+
       if (icon) {
         return (
           <View className="relative">
@@ -69,7 +69,7 @@ export const TabButton = forwardRef<View, TabButtonProps>(
       if (avatar) {
         return (
           <View className={`rounded-full border-2 ${isFocused ? 'border-highlight' : 'border-transparent'}`}>
-            <Avatar src={avatar} size="xxs"  />
+            <Avatar src={avatar} size="xxs" />
           </View>
         );
       }
@@ -89,7 +89,7 @@ export const TabButton = forwardRef<View, TabButtonProps>(
               transform: [{ scaleX: lineScale }],
             }}
           />*/}
-          
+
           {renderContent()}
 
           {labelAnimated ? (
