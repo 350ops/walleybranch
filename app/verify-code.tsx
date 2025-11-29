@@ -17,6 +17,10 @@ export default function VerifyCode() {
 
     const handleVerify = async () => {
         if (code.length !== 6) return;
+        if (!phone) {
+            Alert.alert('Error', 'Phone number is required');
+            return;
+        }
 
         setIsVerifying(true);
         try {
@@ -58,9 +62,11 @@ export default function VerifyCode() {
                 <Text style={{ color: colors.text }} className="text-3xl font-bold mb-4">
                     Enter the code
                 </Text>
-                <Text style={{ color: colors.secondary }} className="text-lg mb-8">
-                    Sent to {phone}
-                </Text>
+                {phone && (
+                    <Text style={{ color: colors.secondary }} className="text-lg mb-8">
+                        Sent to {phone}
+                    </Text>
+                )}
 
                 {/* Input */}
                 <View className="flex-row items-center border-b border-gray-300 pb-2 mb-4">

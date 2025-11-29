@@ -54,7 +54,7 @@ export default function NotificationsScreen() {
             <Chip
               key={filter.value}
               label={filter.label}
-              active={selectedType === filter.value}
+              isSelected={selectedType === filter.value}
               onPress={() => setSelectedType(filter.value)}
             />
           ))}
