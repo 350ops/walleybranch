@@ -1,11 +1,11 @@
 {
   "expo": {
     "newArchEnabled": true,
-    "name": "Worklance",
-    "slug": "worklance",
+    "name": "Piper",
+    "slug": "piper",
     "version": "1.0.0",
     "runtimeVersion": "1.0.0",
-    "scheme": "worklancer",
+    "scheme": "piper",
     "experiments": {
       "tsconfigPaths": true
     },
@@ -31,7 +31,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mmdev13.worklancer",
+      "bundleIdentifier": "com.mmdev13.piper",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -49,7 +49,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "42857544-702e-4126-8518-e1e9bdb55f97"
+        "projectId": "bf25f930-c503-4414-92bf-0220739770d6"
       }
     },
     "owner": "mmdev13"
