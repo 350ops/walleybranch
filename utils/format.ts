@@ -7,7 +7,6 @@ export const formatCurrency = (value: number, currency: string = 'USD') => {
 };
 
 export const formatRelativeTime = (date: string | Date) => {
-  const intl = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
   const now = new Date();
   const target = typeof date === 'string' ? new Date(date) : date;
   const diffMs = target.getTime() - now.getTime();
@@ -16,10 +15,13 @@ export const formatRelativeTime = (date: string | Date) => {
   const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
 
   if (Math.abs(diffMinutes) < 60) {
-    return intl.format(diffMinutes, 'minute');
+    const val = Math.abs(diffMinutes);
+    return diffMinutes < 0 ? `${val} minute${val !== 1 ? 's' : ''} ago` : `in ${val} minute${val !== 1 ? 's' : ''}`;
   }
   if (Math.abs(diffHours) < 24) {
-    return intl.format(diffHours, 'hour');
+    const val = Math.abs(diffHours);
+    return diffHours < 0 ? `${val} hour${val !== 1 ? 's' : ''} ago` : `in ${val} hour${val !== 1 ? 's' : ''}`;
   }
-  return intl.format(diffDays, 'day');
+  const val = Math.abs(diffDays);
+  return diffDays < 0 ? `${val} day${val !== 1 ? 's' : ''} ago` : `in ${val} day${val !== 1 ? 's' : ''}`;
 };

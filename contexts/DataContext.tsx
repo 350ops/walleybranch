@@ -171,6 +171,7 @@ type SupabaseDataContextValue = {
   updateProfile: (input: ProfileUpdateInput) => Promise<Profile>;
   updateUserSettings: (input: UserSettingsUpdateInput) => Promise<UserSettings>;
   markNotificationAsRead: (id: string) => Promise<void>;
+  setBalance: (amount: number) => Promise<void>;
 };
 
 const SupabaseDataContext = createContext<SupabaseDataContextValue | undefined>(undefined);
@@ -524,6 +525,31 @@ export const SupabaseDataProvider = ({ children }: { children: ReactNode }) => {
     [ensureSession]
   );
 
+  const setBalance = useCallback(
+    async (amount: number) => {
+      const user = ensureSession();
+
+      const { data, error } = await supabase
+        .from('accounts')
+        .upsert(
+          {
+            user_id: user.id,
+            balance: amount,
+            available_balance: amount,
+            currency: 'USD',
+          },
+          { onConflict: 'user_id' }
+        )
+        .select('*')
+        .single();
+
+      if (error) throw error;
+
+      setAccount(data as Account);
+    },
+    [ensureSession]
+  );
+
   const value = useMemo<SupabaseDataContextValue>(
     () => ({
       isHydrated,
@@ -548,6 +574,7 @@ export const SupabaseDataProvider = ({ children }: { children: ReactNode }) => {
       updateProfile,
       updateUserSettings,
       markNotificationAsRead,
+      setBalance,
     }),
     [
       isHydrated,
@@ -572,6 +599,7 @@ export const SupabaseDataProvider = ({ children }: { children: ReactNode }) => {
       updateProfile,
       updateUserSettings,
       markNotificationAsRead,
+      setBalance,
     ]
   );
 

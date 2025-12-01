@@ -3,20 +3,14 @@ import { Dimensions, Pressable, Text, View } from 'react-native';
 
 import { useFocusEffect } from '@react-navigation/native';
 import { Link } from 'expo-router';
-import Animated, {
-  Easing,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
 
 import AnimatedView from '@/components/AnimatedView';
 import Avatar from '@/components/Avatar';
-import { BalanceChart } from '@/components/BalanceChart';
 import { CardPreview } from '@/components/CardPreview';
 import { CardScroller } from '@/components/CardScroller';
 import Header, { HeaderIcon } from '@/components/Header';
 import Section from '@/components/layout/Section';
+import StripeCheckout from '@/components/StripeCheckout';
 import ThemedScroller from '@/components/ThemeScroller';
 import ThemedText from '@/components/ThemedText';
 import { TransactionItem } from '@/components/TransactionItem';
@@ -27,30 +21,19 @@ import useProfile from '@/hooks/useProfile';
 import useTransactions from '@/hooks/useTransactions';
 import { formatCurrency, formatRelativeTime } from '@/utils/format';
 
-const { width } = Dimensions.get('window');
-
 export default function HomeScreen() {
   const { profile } = useProfile();
   const { cards } = useCards();
-  const { account } = useSupabaseData();
+  const { account, setBalance, isHydrated } = useSupabaseData();
   const { recentTransactions, monthlyTotals, spentThisMonth } = useTransactions();
   const { unreadCount } = useNotifications();
 
-  const animatedWidth = useSharedValue(0);
+  React.useEffect(() => {
+    if (isHydrated && (!account || account.balance !== 32500)) {
+      setBalance(32500);
+    }
+  }, [account, setBalance, isHydrated]);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      animatedWidth.value = 0;
-      animatedWidth.value = withTiming(width, {
-        duration: 2000,
-        easing: Easing.bezier(0.25, 0.1, 0.25, 1.0),
-      });
-    }, [])
-  );
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    width: animatedWidth.value,
-  }));
   return (
     <>
       <Header
@@ -75,25 +58,20 @@ export default function HomeScreen() {
       />
       <AnimatedView animation="scaleIn" className="flex-1 bg-background" duration={300}>
         <ThemedScroller className="flex-1 bg-background !px-0">
-          <View className="mt-global p-global">
-            <ThemedText className="mb-1 text-sm">Total balance</ThemedText>
-            <View className="flex-row items-center">
-              <ThemedText className="text-4xl font-bold">
-                {account ? formatCurrency(account.balance, account.currency) : '$0.00'}
-              </ThemedText>
-              <Text className="ml-4 rounded-full bg-lime-500 px-2 py-1 text-sm font-semibold text-white">
+          <View className="mt-10 items-center justify-center p-global py-10">
+            <ThemedText className="mb-2 text-base opacity-70">Total balance</ThemedText>
+            <ThemedText className="text-5xl font-bold">
+              {account ? formatCurrency(account.balance, account.currency) : '$0.00'}
+            </ThemedText>
+            <View className="mt-4 flex-row items-center rounded-full bg-lime-500/20 px-3 py-1">
+              <Text className="text-sm font-semibold text-lime-600">
                 {spentThisMonth > 0
-                  ? `${formatCurrency(spentThisMonth, account?.currency ?? 'USD')} this month`
+                  ? `+${formatCurrency(spentThisMonth, account?.currency ?? 'USD')} this month`
                   : 'New user'}
               </Text>
             </View>
+            <StripeCheckout />
           </View>
-          <Animated.View style={animatedStyle} className="overflow-hidden">
-            <BalanceChart
-              data={monthlyTotals.slice(-10).map((item) => item.total)}
-              labels={monthlyTotals.slice(-10).map((item) => item.month)}
-            />
-          </Animated.View>
 
           <Section title="Cards" className="mt-4 px-global">
             <CardScroller space={10}>
@@ -110,8 +88,8 @@ export default function HomeScreen() {
                     cardNumber={card.card_number_last4}
                     expiryDate={`${card.expiry_month.toString().padStart(2, '0')}/${card.expiry_year}`}
                     brand={card.card_brand ?? 'Visa'}
-                    onSetDefault={() => {}}
-                    onDelete={() => {}}
+                    onSetDefault={() => { }}
+                    onDelete={() => { }}
                   />
                 ))
               )}

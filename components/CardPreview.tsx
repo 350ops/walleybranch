@@ -21,7 +21,7 @@ export const CardPreview = (props: {
         >
             <LinearGradient
                 style={{ height: '100%', borderRadius: 24, padding: 24, justifyContent: 'space-between' }}
-                colors={isVisa ? ['#ac004aff', '#2a5cffff'] : ['#74D4FF', '#e6e6e6ca']}
+                colors={isVisa ? ['#e7ef0dff', '#003cff63'] : ['#74D4FF', '#e6e6e6ca']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
             >

@@ -12,7 +12,14 @@
     "plugins": [
       "expo-router",
       "expo-font",
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.mmdev13.piper",
+          "enableGooglePay": true
+        }
+      ]
     ],
     "platforms": [
       "ios",
